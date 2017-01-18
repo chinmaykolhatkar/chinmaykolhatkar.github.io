@@ -1,30 +1,74 @@
 <h1 id="use-following-steps-to-setup-hadoop-cluster">Use following steps to setup hadoop cluster:</h1>
 <h2 id="step1-create-hadoop-user-on-all-nodes">Step1: Create &quot;hadoop&quot; user on all nodes</h2>
-<p>useradd hadoop passwd hadoop</p>
+<pre><code>useradd hadoop 
+passwd hadoop</code></pre>
 <p>NOTE: 1. For ease, please use same password throughout 2. Make sure to put hadoop user in sudoers list. You would need root access only for this step. After this hadoop user would have sudoer's permission.</p>
 <h2 id="step2-extract-the-tar-and-set-env-variables">Step2: Extract the tar and set env variables</h2>
-<p>su hadoop cd /home/hadoop wget <path to location.. Currently getting uploaded> tar -xzvf hadoop.tgz cd /home/hadoop/hadoop cat zephyx.sh &gt;&gt; /home/hadoop/.bashrc source /home/hadoop/.bashrc</p>
+<pre><code>su hadoop
+cd /home/hadoop
+wget &lt;path to location.. Currently getting uploaded&gt;
+tar -xzvf hadoop.tgz
+cd /home/hadoop/hadoop
+cat zephyx.sh &gt;&gt; /home/hadoop/.bashrc
+source /home/hadoop/.bashrc</code></pre>
 <h2 id="step3-specify-seperate-hostnames-on-all-nodes">Step3: Specify seperate hostnames on all nodes</h2>
-<p>sudo vi /etc/hosts Enter the following lines in the /etc/hosts file.</p>
-<p>192.168.1.xxx hadoop-master 192.168.1.xxx hadoop-slave-1 192.168.1.xxx hadoop-slave-2 ... 192.168.1.xxx hadoop-slave-n</p>
+<pre><code>sudo vi /etc/hosts</code></pre>
+<p>Enter the following lines in the /etc/hosts file.</p>
+<pre><code>192.168.1.xxx hadoop-master 
+192.168.1.xxx hadoop-slave-1 
+192.168.1.xxx hadoop-slave-2
+...
+192.168.1.xxx hadoop-slave-n</code></pre>
 <p>NOTE: The IP address put above are samples. Please use the IP address for given system</p>
 <h2 id="step3-on-all-nodes-passwordless-ssh-configuration">Step3: On all nodes: Passwordless ssh configuration</h2>
-<p>su hadoop ssh-keygen -t rsa ssh-copy-id -i ~/.ssh/id_rsa.pub hadoop@hadoop-master ssh-copy-id -i ~/.ssh/id_rsa.pub hadoop@hadoop-slave-1 ssh-copy-id -i ~/.ssh/id_rsa.pub hadoop@hadoop-slave-2 ... ssh-copy-id -i ~/.ssh/id_rsa.pub hadoop@hadoop-slave-n chmod 0600 ~/.ssh/authorized_keys</p>
+<pre><code>su hadoop 
+ssh-keygen -t rsa 
+ssh-copy-id -i ~/.ssh/id_rsa.pub hadoop@hadoop-master 
+ssh-copy-id -i ~/.ssh/id_rsa.pub hadoop@hadoop-slave-1 
+ssh-copy-id -i ~/.ssh/id_rsa.pub hadoop@hadoop-slave-2
+... 
+ssh-copy-id -i ~/.ssh/id_rsa.pub hadoop@hadoop-slave-n
+chmod 0600 ~/.ssh/authorized_keys</code></pre>
 <h2 id="step4-modifyverify-hadoop_homeetchadoopcore-site.xml-fs-default-value-on-all-nodes">Step4: Modify/Verify $HADOOP_HOME/etc/hadoop/core-site.xml fs default value on all nodes</h2>
 <p>core-site.xml:</p>
-<p><configuration> <property> <name>fs.default.name</name> <value>hdfs://hadoop-master:9000/</value> </property> <property> <name>dfs.permissions</name> <value>false</value> </property> </configuration></p>
+<pre><code>&lt;configuration&gt;
+   &lt;property&gt; 
+      &lt;name&gt;fs.default.name&lt;/name&gt; 
+      &lt;value&gt;hdfs://hadoop-master:9000/&lt;/value&gt; 
+   &lt;/property&gt; 
+   &lt;property&gt; 
+      &lt;name&gt;dfs.permissions&lt;/name&gt; 
+      &lt;value&gt;false&lt;/value&gt; 
+   &lt;/property&gt; 
+&lt;/configuration&gt;</code></pre>
 <h2 id="step5-modifyverify-hadoop_homeetchadoophdfs-site.xml-namenode-and-datanode-locations-on-local-filesystems-on-all-nodes">Step5: Modify/Verify $HADOOP_HOME/etc/hadoop/hdfs-site.xml Namenode and Datanode locations on local filesystems on all nodes</h2>
 <p>hdfs-site.xml:</p>
-<p><configuration> <property> <name>dfs.data.dir</name> <value>/home/hadoop/dfs/data/datanode</value> <final>true</final> </property></p>
-<p><property> <name>dfs.name.dir</name> <value>/home/hadoop/dfs/data/namenode</value> <value>/opt/hadoop/hadoop/dfs/name</value> <final>true</final> </property></p>
-<p><property> <name>dfs.replication</name> <value>1</value> </property> </configuration></p>
+<pre><code>&lt;configuration&gt;
+   &lt;property&gt; 
+      &lt;name&gt;dfs.data.dir&lt;/name&gt; 
+      &lt;value&gt;/home/hadoop/dfs/data/datanode&lt;/value&gt; 
+      &lt;final&gt;true&lt;/final&gt; 
+   &lt;/property&gt; 
+
+   &lt;property&gt; 
+      &lt;name&gt;dfs.name.dir&lt;/name&gt; 
+      &lt;value&gt;/home/hadoop/dfs/data/namenode&lt;/value&gt; 
+      &lt;value&gt;/opt/hadoop/hadoop/dfs/name&lt;/value&gt; 
+      &lt;final&gt;true&lt;/final&gt; 
+   &lt;/property&gt; 
+
+   &lt;property&gt; 
+      &lt;name&gt;dfs.replication&lt;/name&gt; 
+      &lt;value&gt;1&lt;/value&gt; 
+   &lt;/property&gt; 
+&lt;/configuration&gt;</code></pre>
 <h2 id="step6-format-namenode">Step6: Format namenode</h2>
-<p>$HADOOP_HOME/bin/hadoop namenode -format</p>
+<pre><code>$HADOOP_HOME/bin/hadoop namenode -format</code></pre>
 <h2 id="step7-format-datanode">Step7: Format Datanode</h2>
-<p>$HADOOP_HOME/bin/hadoop datanode -format</p>
+<pre><code>$HADOOP_HOME/bin/hadoop datanode -format</code></pre>
 <h2 id="step8-start-hadoop">Step8: Start hadoop</h2>
-<p>$HADOOP_HOME/bin/start-all.sh</p>
+<pre><code>$HADOOP_HOME/bin/start-all.sh </code></pre>
 <h2 id="step9-refresh-the-node-mostly-on-master">Step9: Refresh the node mostly on master</h2>
-<p>$HADOOP_HOME/bin/hadoop dfsadmin -refreshNodes</p>
+<pre><code>$HADOOP_HOME/bin/hadoop dfsadmin -refreshNodes</code></pre>
 <h2 id="step10-verify-the-hdfs-for-namenode-and-datanodes">Step10: Verify the HDFS for Namenode and Datanode(s)</h2>
-<p>$HADOOP_HOME/bin/hadoop dfsadmin -report</p>
+<pre><code>$HADOOP_HOME/bin/hadoop dfsadmin -report</code></pre>
