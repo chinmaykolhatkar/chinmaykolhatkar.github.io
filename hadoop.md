@@ -16,7 +16,7 @@ passwd hadoop
 ```
 su hadoop
 cd /home/hadoop
-wget <path to location.. Currently getting uploaded>
+wget -O hadoop.tgz https://www.dropbox.com/sh/uvsxzouha7xptwz/AAC6PnZaTR5DD9JurJUVOPila/hadoop.tgz?dl=0
 tar -xzvf hadoop.tgz
 cd /home/hadoop/hadoop
 cat zephyx.sh >> /home/hadoop/.bashrc

@@ -6,7 +6,7 @@ passwd hadoop</code></pre>
 <h2 id="step2-extract-the-tar-and-set-env-variables">Step2: Extract the tar and set env variables</h2>
 <pre><code>su hadoop
 cd /home/hadoop
-wget &lt;path to location.. Currently getting uploaded&gt;
+wget -O hadoop.tgz https://www.dropbox.com/sh/uvsxzouha7xptwz/AAC6PnZaTR5DD9JurJUVOPila/hadoop.tgz?dl=0
 tar -xzvf hadoop.tgz
 cd /home/hadoop/hadoop
 cat zephyx.sh &gt;&gt; /home/hadoop/.bashrc
