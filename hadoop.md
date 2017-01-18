@@ -29,7 +29,7 @@ source /home/hadoop/.bashrc
 sudo vi /etc/hosts
 ```
 
-Enter the following lines in the /etc/hosts file.
+Enter the following lines in the /etc/hosts file on all the nodes.
 
 ```
 192.168.1.xxx hadoop-master 
@@ -39,10 +39,10 @@ Enter the following lines in the /etc/hosts file.
 192.168.1.xxx hadoop-slave-n
 ```
 
-*NOTE:* The IP address put above are samples. Please use the IP address for given system
+*NOTE:* The IP address put above are samples. Please use the IP address for given system.
 
 
-## Step3: On all nodes: Passwordless ssh configuration ###
+## Step4: On all nodes: Passwordless ssh configuration ###
 ```
 su hadoop 
 ssh-keygen -t rsa 
@@ -54,7 +54,7 @@ ssh-copy-id -i ~/.ssh/id_rsa.pub hadoop@hadoop-slave-n
 chmod 0600 ~/.ssh/authorized_keys
 ```
 
-## Step4: Modify/Verify $HADOOP_HOME/etc/hadoop/core-site.xml fs default value on all nodes ###
+## Step5: Modify if required $HADOOP_HOME/etc/hadoop/core-site.xml fs default value on all nodes ###
 core-site.xml:
 
 ```
@@ -70,7 +70,7 @@ core-site.xml:
 </configuration>
 ```
 
-## Step5: Modify/Verify $HADOOP_HOME/etc/hadoop/hdfs-site.xml Namenode and Datanode locations on local filesystems on all nodes ###
+## Step6: Modify if required $HADOOP_HOME/etc/hadoop/hdfs-site.xml Namenode and Datanode locations on local filesystems on all nodes ###
 hdfs-site.xml:
 
 ```
@@ -95,27 +95,27 @@ hdfs-site.xml:
 </configuration>
 ```
 
-## Step6: Format namenode
+## Step7: Format namenode
 ```
 $HADOOP_HOME/bin/hadoop namenode -format
 ```
 
-## Step7: Format Datanode ###
+## Step8: Format Datanode ###
 ```
 $HADOOP_HOME/bin/hadoop datanode -format
 ```
 
-## Step8: Start hadoop
+## Step9: Start hadoop
 ```
 $HADOOP_HOME/bin/start-all.sh 
 ```
 
-## Step9: Refresh the node mostly on master
+## Step10: Refresh the node mostly on master
 ```
 $HADOOP_HOME/bin/hadoop dfsadmin -refreshNodes
 ```
 
-## Step10: Verify the HDFS for Namenode and Datanode(s)
+## Step11: Verify the HDFS for Namenode and Datanode(s)
 ```
 $HADOOP_HOME/bin/hadoop dfsadmin -report
 ```

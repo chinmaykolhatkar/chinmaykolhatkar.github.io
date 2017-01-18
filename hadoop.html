@@ -13,14 +13,14 @@ cat zephyx.sh &gt;&gt; /home/hadoop/.bashrc
 source /home/hadoop/.bashrc</code></pre>
 <h2 id="step3-specify-seperate-hostnames-on-all-nodes">Step3: Specify seperate hostnames on all nodes</h2>
 <pre><code>sudo vi /etc/hosts</code></pre>
-<p>Enter the following lines in the /etc/hosts file.</p>
+<p>Enter the following lines in the /etc/hosts file on all the nodes.</p>
 <pre><code>192.168.1.xxx hadoop-master 
 192.168.1.xxx hadoop-slave-1 
 192.168.1.xxx hadoop-slave-2
 ...
 192.168.1.xxx hadoop-slave-n</code></pre>
-<p><em>NOTE:</em> The IP address put above are samples. Please use the IP address for given system</p>
-<h2 id="step3-on-all-nodes-passwordless-ssh-configuration">Step3: On all nodes: Passwordless ssh configuration</h2>
+<p><em>NOTE:</em> The IP address put above are samples. Please use the IP address for given system.</p>
+<h2 id="step4-on-all-nodes-passwordless-ssh-configuration">Step4: On all nodes: Passwordless ssh configuration</h2>
 <pre><code>su hadoop 
 ssh-keygen -t rsa 
 ssh-copy-id -i ~/.ssh/id_rsa.pub hadoop@hadoop-master 
@@ -29,7 +29,7 @@ ssh-copy-id -i ~/.ssh/id_rsa.pub hadoop@hadoop-slave-2
 ... 
 ssh-copy-id -i ~/.ssh/id_rsa.pub hadoop@hadoop-slave-n
 chmod 0600 ~/.ssh/authorized_keys</code></pre>
-<h2 id="step4-modifyverify-hadoop_homeetchadoopcore-site.xml-fs-default-value-on-all-nodes">Step4: Modify/Verify $HADOOP_HOME/etc/hadoop/core-site.xml fs default value on all nodes</h2>
+<h2 id="step5-modify-if-required-hadoop_homeetchadoopcore-site.xml-fs-default-value-on-all-nodes">Step5: Modify if required $HADOOP_HOME/etc/hadoop/core-site.xml fs default value on all nodes</h2>
 <p>core-site.xml:</p>
 <pre><code>&lt;configuration&gt;
    &lt;property&gt; 
@@ -41,7 +41,7 @@ chmod 0600 ~/.ssh/authorized_keys</code></pre>
       &lt;value&gt;false&lt;/value&gt; 
    &lt;/property&gt; 
 &lt;/configuration&gt;</code></pre>
-<h2 id="step5-modifyverify-hadoop_homeetchadoophdfs-site.xml-namenode-and-datanode-locations-on-local-filesystems-on-all-nodes">Step5: Modify/Verify $HADOOP_HOME/etc/hadoop/hdfs-site.xml Namenode and Datanode locations on local filesystems on all nodes</h2>
+<h2 id="step6-modify-if-required-hadoop_homeetchadoophdfs-site.xml-namenode-and-datanode-locations-on-local-filesystems-on-all-nodes">Step6: Modify if required $HADOOP_HOME/etc/hadoop/hdfs-site.xml Namenode and Datanode locations on local filesystems on all nodes</h2>
 <p>hdfs-site.xml:</p>
 <pre><code>&lt;configuration&gt;
    &lt;property&gt; 
@@ -62,13 +62,13 @@ chmod 0600 ~/.ssh/authorized_keys</code></pre>
       &lt;value&gt;1&lt;/value&gt; 
    &lt;/property&gt; 
 &lt;/configuration&gt;</code></pre>
-<h2 id="step6-format-namenode">Step6: Format namenode</h2>
+<h2 id="step7-format-namenode">Step7: Format namenode</h2>
 <pre><code>$HADOOP_HOME/bin/hadoop namenode -format</code></pre>
-<h2 id="step7-format-datanode">Step7: Format Datanode</h2>
+<h2 id="step8-format-datanode">Step8: Format Datanode</h2>
 <pre><code>$HADOOP_HOME/bin/hadoop datanode -format</code></pre>
-<h2 id="step8-start-hadoop">Step8: Start hadoop</h2>
+<h2 id="step9-start-hadoop">Step9: Start hadoop</h2>
 <pre><code>$HADOOP_HOME/bin/start-all.sh </code></pre>
-<h2 id="step9-refresh-the-node-mostly-on-master">Step9: Refresh the node mostly on master</h2>
+<h2 id="step10-refresh-the-node-mostly-on-master">Step10: Refresh the node mostly on master</h2>
 <pre><code>$HADOOP_HOME/bin/hadoop dfsadmin -refreshNodes</code></pre>
-<h2 id="step10-verify-the-hdfs-for-namenode-and-datanodes">Step10: Verify the HDFS for Namenode and Datanode(s)</h2>
+<h2 id="step11-verify-the-hdfs-for-namenode-and-datanodes">Step11: Verify the HDFS for Namenode and Datanode(s)</h2>
 <pre><code>$HADOOP_HOME/bin/hadoop dfsadmin -report</code></pre>
