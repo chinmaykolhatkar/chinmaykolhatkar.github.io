@@ -2,7 +2,7 @@
 <h2 id="step1-create-hadoop-user-on-all-nodes">Step1: Create &quot;hadoop&quot; user on all nodes</h2>
 <pre><code>useradd hadoop 
 passwd hadoop</code></pre>
-<p>NOTE: 1. For ease, please use same password throughout 2. Make sure to put hadoop user in sudoers list. You would need root access only for this step. After this hadoop user would have sudoer's permission.</p>
+<p><em>NOTE:</em> * For ease, please use same password throughout * Make sure to put hadoop user in sudoers list. You would need root access only for this step. After this hadoop user would have sudoer's permission.</p>
 <h2 id="step2-extract-the-tar-and-set-env-variables">Step2: Extract the tar and set env variables</h2>
 <pre><code>su hadoop
 cd /home/hadoop
@@ -19,7 +19,7 @@ source /home/hadoop/.bashrc</code></pre>
 192.168.1.xxx hadoop-slave-2
 ...
 192.168.1.xxx hadoop-slave-n</code></pre>
-<p>NOTE: The IP address put above are samples. Please use the IP address for given system</p>
+<p><em>NOTE:</em> The IP address put above are samples. Please use the IP address for given system</p>
 <h2 id="step3-on-all-nodes-passwordless-ssh-configuration">Step3: On all nodes: Passwordless ssh configuration</h2>
 <pre><code>su hadoop 
 ssh-keygen -t rsa 

@@ -7,9 +7,9 @@ useradd hadoop
 passwd hadoop
 ```
 
-NOTE: 
-1. For ease, please use same password throughout
-2. Make sure to put hadoop user in sudoers list. You would need root access only for this step. After this hadoop user would have sudoer's  permission.
+*NOTE:*
+* For ease, please use same password throughout
+* Make sure to put hadoop user in sudoers list. You would need root access only for this step. After this hadoop user would have sudoer's  permission.
 
 ## Step2: Extract the tar and set env variables
 
@@ -39,7 +39,7 @@ Enter the following lines in the /etc/hosts file.
 192.168.1.xxx hadoop-slave-n
 ```
 
-NOTE: The IP address put above are samples. Please use the IP address for given system
+*NOTE:* The IP address put above are samples. Please use the IP address for given system
 
 
 ## Step3: On all nodes: Passwordless ssh configuration ###
